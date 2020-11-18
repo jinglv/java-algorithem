@@ -1,14 +1,19 @@
+package demo.sort.selection;
+
 /**
  * 对象排序，必须要重写父类的equals方法
+ * 需要实现Comparable接口，重写compareTo方法
  *
  * @author jingLv
  * @date 2020/11/10
  */
-public class Student {
-    private String name;
+public class Student implements Comparable<Student> {
+    private final String name;
+    private final int score;
 
-    public Student(String name) {
+    public Student(String name, int score) {
         this.name = name;
+        this.score = score;
     }
 
     /**
@@ -34,5 +39,18 @@ public class Student {
         }
         Student another = (Student) student;
         return this.name.equals(another.name);
+    }
+
+    @Override
+    public int compareTo(Student another) {
+        return this.score - another.score;
+    }
+
+    @Override
+    public String toString() {
+        return "demo.sort.selection.Student{" +
+                "name='" + name + '\'' +
+                ", score=" + score +
+                '}';
     }
 }

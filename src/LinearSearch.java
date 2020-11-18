@@ -1,3 +1,5 @@
+import demo.sort.util.ArrayGenerator;
+
 /**
  * 线性查找算法
  *
@@ -35,13 +37,13 @@ public class LinearSearch {
 //        int search1 = search(data, 666);
 //        System.out.println(search1);
 //        // 定义查找数组
-//        Student[] students = {
-//                new Student("Alice"),
-//                new Student("Mimi"),
-//                new Student("Charles")
+//        demo.sort.selection.Student[] students = {
+//                new demo.sort.selection.Student("Alice"),
+//                new demo.sort.selection.Student("Mimi"),
+//                new demo.sort.selection.Student("Charles")
 //        };
 //        // 定义查找对象
-//        Student mimi = new Student("Mimi");
+//        demo.sort.selection.Student mimi = new demo.sort.selection.Student("Mimi");
 //        // 调用查找方法，期望是比较两个类对象的字符串
 //        int search2 = LinearSearch.search(students, mimi);
 //        System.out.println(search2);
