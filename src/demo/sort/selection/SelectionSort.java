@@ -22,7 +22,7 @@ public class SelectionSort {
                 }
             }
             // 交换元素
-            swap(arr, i, minIndex);
+            SortingHelper.swap(arr, i, minIndex);
         }
     }
 
@@ -39,11 +39,6 @@ public class SelectionSort {
         }
     }
 
-    private static <E> void swap(E[] arr, int i, int j) {
-        E temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
-    }
 
     public static void main(String[] args) {
         int n = 10000;
