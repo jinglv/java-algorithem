@@ -17,14 +17,19 @@ public class InsertionSort {
     public static <E extends Comparable<E>> void sort(E[] arr) {
         for (int i = 0; i < arr.length; i++) {
             // 将arr[i]插入到合适的位置
-           /* for (int j = i; j - 1 >= 0; j--) {
+            for (int j = i; j - 1 >= 0; j--) {
                 if (arr[j].compareTo(arr[j - 1]) < 0) {
                     SortingHelper.swap(arr, j, j - 1);
                 } else {
                     break;
                 }
-            }*/
-            // 代码另一种写法
+            }
+        }
+    }
+
+    public static <E extends Comparable<E>> void sortMerge(E[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            // 将if语句合并到一起
             for (int j = i; j - 1 >= 0 && arr[j].compareTo(arr[j - 1]) < 0; j--) {
                 SortingHelper.swap(arr, j, j - 1);
             }
@@ -36,7 +41,7 @@ public class InsertionSort {
             // 暂存元素
             E t = arr[i];
             int j;
-            for (j = i; j - 1 >= 0 && arr[j].compareTo(arr[j - 1]) < 0; j--) {
+            for (j = i; j - 1 >= 0 && t.compareTo(arr[j - 1]) < 0; j--) {
                 arr[j] = arr[j - 1];
             }
             arr[j] = t;
