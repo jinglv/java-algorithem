@@ -28,7 +28,7 @@ public class SelectionSort {
 
     public static void sortSpace(int[] arr) {
         // 开辟一个新的数组，将每轮选择的最小数字，加入到该数组中
-        int[] newArr = new int[arr.length - 1];
+        int[] newArr = new int[arr.length];
         // 循环数组，进行比较，将每轮最最小的值放入到newArr新的数组中
         for (int value : arr) {
             for (int j = 1; j < arr.length; j++) {
