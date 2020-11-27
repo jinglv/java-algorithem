@@ -37,13 +37,13 @@ public class LinearSearch {
 //        int search1 = search(data, 666);
 //        System.out.println(search1);
 //        // 定义查找数组
-//        demo.sort.selection.Student[] students = {
-//                new demo.sort.selection.Student("Alice"),
-//                new demo.sort.selection.Student("Mimi"),
-//                new demo.sort.selection.Student("Charles")
+//        demo.pojo.Student[] students = {
+//                new demo.pojo.Student("Alice"),
+//                new demo.pojo.Student("Mimi"),
+//                new demo.pojo.Student("Charles")
 //        };
 //        // 定义查找对象
-//        demo.sort.selection.Student mimi = new demo.sort.selection.Student("Mimi");
+//        demo.pojo.Student mimi = new demo.pojo.Student("Mimi");
 //        // 调用查找方法，期望是比较两个类对象的字符串
 //        int search2 = LinearSearch.search(students, mimi);
 //        System.out.println(search2);

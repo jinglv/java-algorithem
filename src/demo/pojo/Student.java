@@ -1,4 +1,4 @@
-package demo.sort.selection;
+package demo.pojo;
 
 /**
  * 对象排序，必须要重写父类的equals方法
@@ -48,7 +48,7 @@ public class Student implements Comparable<Student> {
 
     @Override
     public String toString() {
-        return "demo.sort.selection.Student{" +
+        return "demo.pojo.Student{" +
                 "name='" + name + '\'' +
                 ", score=" + score +
                 '}';
