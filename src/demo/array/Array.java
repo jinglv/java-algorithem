@@ -211,6 +211,14 @@ public class Array<E> {
         }
     }
 
+    public E getLast() {
+        return get(size - 1);
+    }
+
+    public E getFirst() {
+        return get(0);
+    }
+
     /**
      * 数组格式化输出
      *
