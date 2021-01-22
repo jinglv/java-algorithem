@@ -1,6 +1,6 @@
 package demo.array;
 
-import demo.pojo.Student;
+import demo.model.Student;
 
 /**
  * @author jingLv
