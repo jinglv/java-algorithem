@@ -1,4 +1,4 @@
-package demo.sort.util;
+package demo.helper.util;
 
 import java.util.Random;
 
@@ -18,8 +18,8 @@ public class ArrayGenerator {
     /**
      * 生成长度为n的顺序数组
      *
-     * @param n
-     * @return
+     * @param n 数组长度
+     * @return 返回生成的顺序数组
      */
     public static Integer[] generateOrderedArray(int n) {
         Integer[] arr = new Integer[n];
@@ -32,9 +32,9 @@ public class ArrayGenerator {
     /**
      * 生成长度为n的随机数组
      *
-     * @param n
-     * @param bound
-     * @return
+     * @param n     数组长度
+     * @param bound 随机数
+     * @return 返回生成的随机数组
      */
     public static Integer[] generateRandomArray(int n, int bound) {
         Integer[] arr = new Integer[n];

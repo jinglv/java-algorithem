@@ -1,7 +1,7 @@
 package demo.sort.insertion;
 
-import demo.sort.util.ArrayGenerator;
-import demo.sort.util.SortingHelper;
+import demo.helper.util.ArrayGenerator;
+import demo.helper.util.SortingHelper;
 
 import java.util.Arrays;
 

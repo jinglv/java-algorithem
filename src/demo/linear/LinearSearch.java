@@ -33,13 +33,15 @@ public class LinearSearch {
     }
 
     public static void main(String[] args) {
-        Integer[] data = {24, 18, 12, 9, 16, 66, 32, 4};
-        int i = search(data, 16);
-        System.out.println("目标元素的位置：" + i);
-
-        Student[] students = {new Student("Alice"), new Student("Bobo"), new Student("Charles")};
-        Student bobo = new Student("Bobo");
-        int i1 = search(students, bobo);
-        System.out.println(i1);
+//        Integer[] data = {24, 18, 12, 9, 16, 66, 32, 4};
+//        int i = search(data, 16);
+//        System.out.println("目标元素的位置：" + i);
+//
+//        Student[] students = {new Student("Alice"), new Student("Bobo"), new Student("Charles")};
+//        Student bobo = new Student("Bobo");
+//        int i1 = search(students, bobo);
+//        System.out.println(i1);
+        int n = 10000000;
+        
     }
 }

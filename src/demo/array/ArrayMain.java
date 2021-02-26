@@ -1,6 +1,6 @@
 package demo.array;
 
-import demo.model.Student;
+import demo.helper.model.Student;
 
 /**
  * @author jingLv

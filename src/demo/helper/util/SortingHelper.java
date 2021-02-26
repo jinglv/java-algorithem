@@ -1,4 +1,4 @@
-package demo.sort.util;
+package demo.helper.util;
 
 import demo.sort.insertion.InsertionSort;
 import demo.sort.selection.SelectionSort;
@@ -14,6 +14,13 @@ public class SortingHelper {
     private SortingHelper() {
     }
 
+    /**
+     * 验证数组是否有序
+     *
+     * @param arr 待验证的数组
+     * @param <E> 类型
+     * @return Boolean
+     */
     public static <E extends Comparable<E>> boolean isSorted(E[] arr) {
         for (int i = 1; i < arr.length; i++) {
             if (arr[i - 1].compareTo(arr[i]) > 0) {
@@ -23,7 +30,15 @@ public class SortingHelper {
         return true;
     }
 
+    /**
+     * 验证排序方法的时间
+     *
+     * @param sortName 排序方法名称
+     * @param arr      待排序数组
+     * @param <E>      类型
+     */
     public static <E extends Comparable<E>> void sortTest(String sortName, E[] arr) {
+        // 当前纳秒的时间
         long startTime = System.nanoTime();
         if ("SelectionSort".equals(sortName)) {
             SelectionSort.sort(arr);
@@ -40,6 +55,14 @@ public class SortingHelper {
         System.out.println(String.format("%s, n = %d : %f s", sortName, arr.length, time));
     }
 
+    /**
+     * 交换数组的元素
+     *
+     * @param arr 数组
+     * @param i   元素i
+     * @param j   元素j
+     * @param <E> 类型
+     */
     public static <E> void swap(E[] arr, int i, int j) {
         E temp = arr[i];
         arr[i] = arr[j];

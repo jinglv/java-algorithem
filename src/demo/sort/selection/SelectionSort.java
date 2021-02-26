@@ -1,7 +1,7 @@
 package demo.sort.selection;
 
-import demo.sort.util.ArrayGenerator;
-import demo.sort.util.SortingHelper;
+import demo.helper.util.ArrayGenerator;
+import demo.helper.util.SortingHelper;
 
 /**
  * @author jingLv
@@ -26,13 +26,13 @@ public class SelectionSort {
         }
     }
 
-    public static void sortSpace(int[] arr) {
-        // 开辟一个新的数组，将每轮选择的最小数字，加入到该数组中
-        int[] newArr = new int[arr.length];
+    public static <E extends Comparable<E>> void sortSpace(E[] arr) {
+        // 开辟一个新的数组，将每轮选择的最小数字，加入到该数组中，注意：泛型数组的需要强转
+        E[] newArr = (E[]) new Object[arr.length];
         // 循环数组，进行比较，将每轮最最小的值放入到newArr新的数组中
-        for (int value : arr) {
+        for (E value : arr) {
             for (int j = 1; j < arr.length; j++) {
-                if (arr[j] < value) {
+                if (arr[j].compareTo(value) < 0) {
                     newArr[j] = arr[j];
                 }
             }
