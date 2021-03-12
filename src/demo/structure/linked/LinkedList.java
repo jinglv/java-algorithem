@@ -1,4 +1,4 @@
-package demo.linked;
+package demo.structure.linked;
 
 /**
  * 链表

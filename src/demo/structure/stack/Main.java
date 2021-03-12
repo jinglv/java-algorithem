@@ -1,4 +1,4 @@
-package demo.stack;
+package demo.structure.stack;
 
 import java.util.Random;
 

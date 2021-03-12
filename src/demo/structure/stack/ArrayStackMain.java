@@ -1,13 +1,13 @@
-package demo.stack;
+package demo.structure.stack;
 
 /**
  * @author jingLv
  * @date 2020/11/30
  */
-public class LinkedListStackMain {
+public class ArrayStackMain {
 
     public static void main(String[] args) {
-        LinkedListStack<Integer> stack = new LinkedListStack<>();
+        ArrayStack<Integer> stack = new ArrayStack<>();
         for (int i = 0; i < 5; i++) {
             stack.push(i);
             System.out.println(stack);

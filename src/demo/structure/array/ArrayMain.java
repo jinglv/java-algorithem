@@ -1,4 +1,4 @@
-package demo.array;
+package demo.structure.array;
 
 import demo.helper.model.Student;
 

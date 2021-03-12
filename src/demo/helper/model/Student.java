@@ -2,7 +2,7 @@ package demo.helper.model;
 
 /**
  * 对象排序，必须要重写父类的equals方法
- * 需要实现Comparable接口，重写compareTo方法
+ * 实现Comparable接口，必须重写compareTo方法
  *
  * @author jingLv
  * @date 2020/11/10
@@ -48,7 +48,7 @@ public class Student implements Comparable<Student> {
 
     @Override
     public String toString() {
-        return "demo.helper.model.Student{" +
+        return "Student{" +
                 "name='" + name + '\'' +
                 ", score=" + score +
                 '}';

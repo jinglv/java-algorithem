@@ -1,6 +1,6 @@
-package demo.stack;
+package demo.structure.stack;
 
-import demo.linked.LinkedList;
+import demo.structure.linked.LinkedList;
 
 /**
  * @author jingLv

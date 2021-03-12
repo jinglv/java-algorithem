@@ -5,7 +5,7 @@ package demo.linear;
  * @date 2021/01/18
  */
 public class Student {
-    private String name;
+    private final String name;
 
     public Student(String name) {
         this.name = name;

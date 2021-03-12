@@ -1,4 +1,4 @@
-package demo.queue;
+package demo.structure.queue;
 
 /**
  * @author jingLv

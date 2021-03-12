@@ -1,6 +1,8 @@
-package demo.array;
+package demo.structure.array;
 
 /**
+ * 动态数组
+ *
  * @author jingLv
  * @date 2020/11/26
  */

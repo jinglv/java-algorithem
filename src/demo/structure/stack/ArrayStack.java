@@ -1,22 +1,22 @@
-package demo.queue;
+package demo.structure.stack;
 
-import demo.array.Array;
+import demo.structure.array.Array;
 
 /**
  * @author jingLv
- * @date 2020/12/03
+ * @date 2020/11/30
  */
-public class ArrayQueue<E> implements Queue<E> {
-    private Array<E> array;
+public class ArrayStack<E> implements Stack<E> {
 
-    public ArrayQueue(int capacity) {
+    Array<E> array;
+
+    public ArrayStack(int capacity) {
         array = new Array<>(capacity);
     }
 
-    public ArrayQueue() {
+    public ArrayStack() {
         array = new Array<>();
     }
-
 
     @Override
     public int getSize() {
@@ -28,37 +28,37 @@ public class ArrayQueue<E> implements Queue<E> {
         return array.isEmpty();
     }
 
+    @Override
+    public void push(E e) {
+        array.addLast(e);
+    }
+
+    @Override
+    public E pop() {
+        return array.removeLast();
+    }
+
+    @Override
+    public E peek() {
+        return array.getLast();
+    }
+
     public int getCapacity() {
         return array.getCapacity();
     }
 
     @Override
-    public void enqueue(E e) {
-        array.addLast(e);
-    }
-
-    @Override
-    public E dequeue() {
-        return array.removeFirst();
-    }
-
-    @Override
-    public E getFront() {
-        return array.getFirst();
-    }
-
-    @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
-        result.append("Queue:");
-        result.append("front [");
+        result.append("Stack:");
+        result.append('[');
         for (int i = 0; i < array.getSize(); i++) {
             result.append(array.get(i));
             if (i != array.getSize() - 1) {
                 result.append(",");
             }
         }
-        result.append("] tail");
+        result.append("] top");
         return result.toString();
     }
 }

@@ -1,5 +1,6 @@
 package demo.helper.util;
 
+import demo.sort.bubble.BubbleSort;
 import demo.sort.insertion.InsertionSort;
 import demo.sort.selection.SelectionSort;
 
@@ -44,15 +45,17 @@ public class SortingHelper {
             SelectionSort.sort(arr);
         } else if ("InsertionSort".equals(sortName)) {
             InsertionSort.sort(arr);
-        } else if ("InsertionSort2".equals(sortName)) {
+        } else if ("InsertionSortPlus".equals(sortName)) {
             InsertionSort.sortPlus(arr);
+        } else if ("BubbleSort".equals(sortName)) {
+            BubbleSort.sort(arr);
         }
         long endTime = System.nanoTime();
         double time = (endTime - startTime) / 1000000000.0;
         if (!SortingHelper.isSorted(arr)) {
             throw new RuntimeException(sortName + " failed");
         }
-        System.out.println(String.format("%s, n = %d : %f s", sortName, arr.length, time));
+        System.out.printf("%s, n = %d : %f s%n", sortName, arr.length, time);
     }
 
     /**
