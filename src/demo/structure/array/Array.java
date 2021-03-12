@@ -1,20 +1,26 @@
 package demo.structure.array;
 
 /**
- * 动态数组
+ * 自定义Java数组的动态数组
  *
  * @author jingLv
  * @date 2020/11/26
  */
 public class Array<E> {
 
+    /**
+     * 数组中存储的数据
+     */
     private E[] data;
+    /**
+     * 数组的长度
+     */
     private int size;
 
     /**
-     * 构造函数，传入数组的容量capacity构造Array
+     * 构造函数，初始化数组，传入数组的容量capacity构造Array
      *
-     * @param capacity 容量
+     * @param capacity 容量（数组长度）
      */
     public Array(int capacity) {
         data = (E[]) new Object[capacity];
@@ -22,7 +28,7 @@ public class Array<E> {
     }
 
     /**
-     * 无参数的构造函数，默认数组的容量capacity=10
+     * 无参数的构造函数，初始化数组，默认数组的容量capacity=10
      */
     public Array() {
         this(10);
@@ -56,30 +62,6 @@ public class Array<E> {
     }
 
     /**
-     * 向所有元素后添加一个新元素
-     *
-     * @param e 元素
-     */
-    public void addLast(E e) {
-//        // 如果数组已满，则不能添加元素
-//        if (size == data.length) {
-//            throw new IllegalArgumentException("AddLast failed.Array is full");
-//        }
-//        data[size] = e;
-//        size++;
-        add(size, e);
-    }
-
-    /**
-     * 向所有元素头添加一个新元素
-     *
-     * @param e 元素
-     */
-    public void addFirst(E e) {
-        add(0, e);
-    }
-
-    /**
      * 在第index位置插入一个新元素e
      *
      * @param index 指定位置
@@ -94,14 +76,38 @@ public class Array<E> {
         if (size == data.length) {
             resize(2 * data.length);
         }
-
-        for (int i = size - 1; i >= index; i--) {
-            // 后一个元素赋值前一个元素的值
-            data[i + 1] = data[i];
+//        for (int i = size - 1; i >= index; i--) {
+//            // 后一个元素赋值前一个元素的值
+//            data[i + 1] = data[i];
+//        }
+        // 数组拷贝
+        if (size - index >= 0) {
+            System.arraycopy(data, index, data, index + 1, size - index);
         }
+        // 数组中插入元素
         data[index] = e;
+        // 数组长度增加
         size++;
     }
+
+    /**
+     * 向数组最后一位添加一个新元素
+     *
+     * @param e 元素
+     */
+    public void addLast(E e) {
+        add(size, e);
+    }
+
+    /**
+     * 向数组头添加一个新元素
+     *
+     * @param e 元素
+     */
+    public void addFirst(E e) {
+        add(0, e);
+    }
+
 
     /**
      * 获取index索引位置的元素
@@ -114,6 +120,24 @@ public class Array<E> {
             throw new IllegalArgumentException("Get failed.Index is illegal");
         }
         return data[index];
+    }
+
+    /**
+     * 获取数组最后一个元素
+     *
+     * @return 元素
+     */
+    public E getLast() {
+        return get(size - 1);
+    }
+
+    /**
+     * 获取数组的第一个元素
+     *
+     * @return 元素
+     */
+    public E getFirst() {
+        return get(0);
     }
 
     /**
@@ -170,17 +194,38 @@ public class Array<E> {
             throw new IllegalArgumentException("Remove failed.Index is illegal");
         }
         E ret = data[index];
-        for (int i = index + 1; i < size; i++) {
-            data[i - 1] = data[i];
+//        for (int i = index + 1; i < size; i++) {
+//            data[i - 1] = data[i];
+//        }
+        // 使用数组拷贝
+        if (size - index + 1 >= 0) {
+            System.arraycopy(data, index + 1, data, index + 1 - 1, size - index + 1);
         }
+
         size--;
         // 对象引用置为null，便于垃圾回收
         data[size] = null;
         // 防止复杂度动荡，size小于长度的四分之一时，才进行缩容
         if (size == data.length / 4 && data.length / 2 != 0) {
+            // 数组缩容
             resize(data.length / 2);
         }
         return ret;
+    }
+
+
+    /**
+     * 从数组中删除指定元素
+     *
+     * @param e 元素
+     */
+    public void removeElement(E e) {
+        // 搜索元素
+        int index = find(e);
+        // 如果元素存在，则删除
+        if (index != -1) {
+            remove(index);
+        }
     }
 
     /**
@@ -201,24 +246,22 @@ public class Array<E> {
         return remove(size - 1);
     }
 
+
     /**
-     * 从数组中删除元素
+     * 数组扩容
      *
-     * @param e 元素
+     * @param newCapacity 新的容量
      */
-    public void removeElement(E e) {
-        int index = find(e);
-        if (index != -1) {
-            remove(index);
+    private void resize(int newCapacity) {
+        E[] newData = (E[]) new Object[newCapacity];
+//        for (int i = 0; i < size; i++) {
+//            newData[i] = data[i];
+//        }
+        // 数组拷贝
+        if (size >= 0) {
+            System.arraycopy(data, 0, newData, 0, size);
         }
-    }
-
-    public E getLast() {
-        return get(size - 1);
-    }
-
-    public E getFirst() {
-        return get(0);
+        data = newData;
     }
 
     /**
@@ -239,18 +282,5 @@ public class Array<E> {
         }
         res.append(']');
         return res.toString();
-    }
-
-    /**
-     * 数组扩容
-     *
-     * @param newCapacity 新的容量
-     */
-    private void resize(int newCapacity) {
-        E[] newData = (E[]) new Object[newCapacity];
-        for (int i = 0; i < size; i++) {
-            newData[i] = data[i];
-        }
-        data = newData;
     }
 }
