@@ -49,8 +49,8 @@ public class ValidParentheses {
     }
 
     public static void main(String[] args) {
-        System.out.println(new ValidParentheses().isValid("[{()}]"));
-        System.out.println(new ValidParentheses().isValid("[]{}()"));
-        System.out.println(new ValidParentheses().isValid("[({)}]"));
+        System.out.println("[{()}]，是否匹配？" + new ValidParentheses().isValid("[{()}]"));
+        System.out.println("[]{}()，是否匹配？" + new ValidParentheses().isValid("[]{}()"));
+        System.out.println("[({)}]，是否匹配？" + new ValidParentheses().isValid("[({)}]"));
     }
 }

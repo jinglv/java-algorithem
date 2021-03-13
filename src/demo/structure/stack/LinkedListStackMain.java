@@ -1,6 +1,8 @@
 package demo.structure.stack;
 
 /**
+ * 链表实现栈
+ *
  * @author jingLv
  * @date 2020/11/30
  */

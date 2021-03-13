@@ -3,6 +3,8 @@ package demo.structure.stack;
 import demo.structure.linked.LinkedList;
 
 /**
+ * 链表实现栈
+ *
  * @author jingLv
  * @date 2020/12/10
  */
@@ -41,9 +43,6 @@ public class LinkedListStack<E> implements Stack<E> {
 
     @Override
     public String toString() {
-        StringBuilder result = new StringBuilder();
-        result.append("Stack: top ");
-        result.append(list);
-        return result.toString();
+        return "Stack: top " + list;
     }
 }
