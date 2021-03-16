@@ -1,45 +1,49 @@
 package demo.structure.queue;
 
 /**
- * 数组实现循环队列
+ * 使用size实现队列，会浪费一个空间
  *
- * @author jingLv
- * @date 2020/12/03
+ * @author jinglv
+ * @date 2021/03/15
  */
-public class LoopQueue<E> implements Queue<E> {
+public class LoopQueueNoSize<E> implements Queue<E> {
     /**
-     * 队列元素
+     * 队列的数组
      */
     private E[] data;
     /**
-     * front 队头
-     * tail 队尾
+     * front队头
+     * tail队尾
      */
     private int front, tail;
-    /**
-     * 队列存储元素的数量
-     */
-    private int size;
 
     /**
-     * 构造函数--初始化队列
-     * front=tail为空数组
+     * 构造函数，初始化队列
      *
      * @param capacity 数组的容量
      */
-    public LoopQueue(int capacity) {
-        // 循环队列，有意识的浪费一个单位
-        data = (E[]) new Object[capacity + 1];
+    public LoopQueueNoSize(int capacity) {
+        // 由于不浪费空间，所以data静态数组的大小是capacity，而不是capacity+1
+        data = (E[]) new Object[capacity];
         front = 0;
         tail = 0;
-        size = 0;
     }
 
     /**
-     * 无参构造函数--默认初始化数组容量为10
+     * 构造函数，初始化队列，默认容量为10
      */
-    public LoopQueue() {
+    public LoopQueueNoSize() {
         this(10);
+    }
+
+    @Override
+    public int getSize() {
+        // 此时的getSize的逻辑
+        // 如果tail>=front，非常简单，队列中的元素个数就是tail-front
+        // 如果tail<front，说明我们的循环队列"循环"起来了，此时队列中的元素个数为：tail-front+data.length
+        // 也可以理解成，此时，data中没有元素的数目为front-tail
+        // 整体元素个数就是data.length-(front-tail)=data.length+tail-front
+        return tail >= front ? tail - front : tail - front + data.length;
     }
 
     /**
@@ -49,16 +53,6 @@ public class LoopQueue<E> implements Queue<E> {
      */
     public int getCapacity() {
         return data.length - 1;
-    }
-
-    /**
-     * 获取队列中元素个数
-     *
-     * @return 元素个数
-     */
-    @Override
-    public int getSize() {
-        return size;
     }
 
     /**
@@ -72,20 +66,17 @@ public class LoopQueue<E> implements Queue<E> {
     }
 
     /**
-     * 队列中添加元素（入队）
+     * 队列中添加元素
      *
      * @param e 添加的元素
      */
     @Override
     public void enqueue(E e) {
-        // 入队查询队列是否是满的
         if ((tail + 1) % data.length == front) {
-            // 队列是满的则进行2倍扩容
             resize(getCapacity() * 2);
         }
         data[tail] = e;
         tail = (tail + 1) % data.length;
-        size++;
     }
 
     /**
@@ -102,9 +93,8 @@ public class LoopQueue<E> implements Queue<E> {
         E ret = data[front];
         data[front] = null;
         front = (front + 1) % data.length;
-        size--;
         // 出队的低于队列长度的四分之一，则进缩容
-        if (size == getCapacity() / 4 && getCapacity() / 2 != 0) {
+        if (getSize() == getCapacity() / 4 && getCapacity() / 2 != 0) {
             resize(getCapacity() / 2);
         }
         return ret;
@@ -130,12 +120,13 @@ public class LoopQueue<E> implements Queue<E> {
      */
     private void resize(int newCapacity) {
         E[] newData = (E[]) new Object[newCapacity + 1];
-        for (int i = 0; i < size; i++) {
+        int sz = getSize();
+        for (int i = 0; i < sz; i++) {
             newData[i] = data[(i + front) % data.length];
         }
         data = newData;
         front = 0;
-        tail = size;
+        tail = sz;
     }
 
     /**
@@ -146,7 +137,7 @@ public class LoopQueue<E> implements Queue<E> {
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder();
-        res.append(String.format("Queue:size = %d, capacity = %d \n", size, getCapacity()));
+        res.append(String.format("Queue:size = %d, capacity = %d \n", getSize(), getCapacity()));
         res.append("front [");
         for (int i = front; i != tail; i = (i + 1) % data.length) {
             res.append(data[i]);
@@ -157,5 +148,19 @@ public class LoopQueue<E> implements Queue<E> {
         }
         res.append("] tail");
         return res.toString();
+    }
+
+    public static void main(String[] args) {
+        LoopQueueNoSize<Integer> queue = new LoopQueueNoSize<>();
+        for (int i = 0; i < 10; i++) {
+            // 入队
+            queue.enqueue(i);
+            System.out.println(queue);
+            if (i % 3 == 2) {
+                // 出队
+                queue.dequeue();
+                System.out.println(queue);
+            }
+        }
     }
 }

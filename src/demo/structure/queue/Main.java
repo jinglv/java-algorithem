@@ -28,9 +28,9 @@ public class Main {
     /**
      * 测试使用q运行OpCount个enqueue和dequeue操作所需要的时间，单位秒
      *
-     * @param q
-     * @param opCount
-     * @return
+     * @param q       队列
+     * @param opCount 队列的元素
+     * @return 时间（秒）
      */
     private static double testQueue(Queue<Integer> q, int opCount) {
         long startTime = System.nanoTime();

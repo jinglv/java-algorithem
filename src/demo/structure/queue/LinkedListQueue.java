@@ -1,11 +1,12 @@
 package demo.structure.queue;
 
 /**
+ * 链表实现队列
+ *
  * @author jingLv
  * @date 2020/12/10
  */
 public class LinkedListQueue<E> implements Queue<E> {
-
     /**
      * 节点设置为私有的内部类，对于用户不需要知道节点的实现细节
      */
@@ -19,15 +20,29 @@ public class LinkedListQueue<E> implements Queue<E> {
          */
         public Node next;
 
+        /**
+         * Node构造函数
+         *
+         * @param e    数据
+         * @param next 指针
+         */
         public Node(E e, Node next) {
             this.e = e;
             this.next = next;
         }
 
+        /**
+         * Node构造函数
+         *
+         * @param e 数据
+         */
         public Node(E e) {
             this(e, null);
         }
 
+        /**
+         * Node构造函数
+         */
         public Node() {
             this(null, null);
         }
@@ -97,7 +112,7 @@ public class LinkedListQueue<E> implements Queue<E> {
     /**
      * 查看队首的元素
      *
-     * @return
+     * @return 队头元素
      */
     @Override
     public E getFront() {
@@ -113,7 +128,7 @@ public class LinkedListQueue<E> implements Queue<E> {
         res.append("Queue: front ");
         Node current = head;
         while (current != null) {
-            res.append(current + "->");
+            res.append(current).append("->");
             current = current.next;
         }
         res.append("NULL tail");

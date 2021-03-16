@@ -76,13 +76,9 @@ public class Array<E> {
         if (size == data.length) {
             resize(2 * data.length);
         }
-//        for (int i = size - 1; i >= index; i--) {
-//            // 后一个元素赋值前一个元素的值
-//            data[i + 1] = data[i];
-//        }
-        // 数组拷贝
-        if (size - index >= 0) {
-            System.arraycopy(data, index, data, index + 1, size - index);
+        for (int i = size - 1; i >= index; i--) {
+            // 后一个元素赋值前一个元素的值
+            data[i + 1] = data[i];
         }
         // 数组中插入元素
         data[index] = e;
@@ -194,14 +190,9 @@ public class Array<E> {
             throw new IllegalArgumentException("Remove failed.Index is illegal");
         }
         E ret = data[index];
-//        for (int i = index + 1; i < size; i++) {
-//            data[i - 1] = data[i];
-//        }
-        // 使用数组拷贝
-        if (size - index + 1 >= 0) {
-            System.arraycopy(data, index + 1, data, index + 1 - 1, size - index + 1);
+        for (int i = index + 1; i < size; i++) {
+            data[i - 1] = data[i];
         }
-
         size--;
         // 对象引用置为null，便于垃圾回收
         data[size] = null;
@@ -254,12 +245,8 @@ public class Array<E> {
      */
     private void resize(int newCapacity) {
         E[] newData = (E[]) new Object[newCapacity];
-//        for (int i = 0; i < size; i++) {
-//            newData[i] = data[i];
-//        }
-        // 数组拷贝
-        if (size >= 0) {
-            System.arraycopy(data, 0, newData, 0, size);
+        for (int i = 0; i < size; i++) {
+            newData[i] = data[i];
         }
         data = newData;
     }

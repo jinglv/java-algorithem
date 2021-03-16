@@ -1,19 +1,19 @@
 package demo.structure.queue;
 
 /**
- * 数组实现循环队列
+ * 使用size，不浪费一个空间
  *
- * @author jingLv
- * @date 2020/12/03
+ * @author jinglv
+ * @date 2021/03/15
  */
-public class LoopQueue<E> implements Queue<E> {
+public class LoopQueueSize<E> implements Queue<E> {
     /**
-     * 队列元素
+     * 队列的数组
      */
     private E[] data;
     /**
-     * front 队头
-     * tail 队尾
+     * front队头
+     * tail队尾
      */
     private int front, tail;
     /**
@@ -22,37 +22,27 @@ public class LoopQueue<E> implements Queue<E> {
     private int size;
 
     /**
-     * 构造函数--初始化队列
-     * front=tail为空数组
+     * 构造函数，初始化队列
      *
      * @param capacity 数组的容量
      */
-    public LoopQueue(int capacity) {
-        // 循环队列，有意识的浪费一个单位
-        data = (E[]) new Object[capacity + 1];
+    public LoopQueueSize(int capacity) {
+        // 由于不浪费空间，所以data静态数组的大小是capacity，而不是capacity+1
+        data = (E[]) new Object[capacity];
         front = 0;
         tail = 0;
         size = 0;
     }
 
     /**
-     * 无参构造函数--默认初始化数组容量为10
+     * 构造函数，初始化队列，默认容量为10
      */
-    public LoopQueue() {
+    public LoopQueueSize() {
         this(10);
     }
 
     /**
-     * 获取数组队列的数组容量
-     *
-     * @return 容量
-     */
-    public int getCapacity() {
-        return data.length - 1;
-    }
-
-    /**
-     * 获取队列中元素个数
+     * 获取队列中元素的个数
      *
      * @return 元素个数
      */
@@ -62,25 +52,34 @@ public class LoopQueue<E> implements Queue<E> {
     }
 
     /**
+     * 获取数组队列的数组容量
+     *
+     * @return 容量
+     */
+    public int getCapacity() {
+        return data.length;
+    }
+
+    /**
      * 判断队列是否为空
      *
      * @return boolean
      */
     @Override
     public boolean isEmpty() {
-        return front == tail;
+        // 不再使用front和tail之间的关系来判断队列是否为空，而是直接使用size
+        return size == 0;
     }
 
     /**
-     * 队列中添加元素（入队）
+     * 队列中添加元素
      *
      * @param e 添加的元素
      */
     @Override
     public void enqueue(E e) {
-        // 入队查询队列是否是满的
-        if ((tail + 1) % data.length == front) {
-            // 队列是满的则进行2倍扩容
+        // 使用size判断队列是否已满
+        if (size == getCapacity()) {
             resize(getCapacity() * 2);
         }
         data[tail] = e;
@@ -89,9 +88,9 @@ public class LoopQueue<E> implements Queue<E> {
     }
 
     /**
-     * 队列中删除数据(出队)
+     * 删除队列中的元素
      *
-     * @return 删除队列的元素
+     * @return 删除的元素
      */
     @Override
     public E dequeue() {
@@ -129,7 +128,7 @@ public class LoopQueue<E> implements Queue<E> {
      * @param newCapacity 新的容量
      */
     private void resize(int newCapacity) {
-        E[] newData = (E[]) new Object[newCapacity + 1];
+        E[] newData = (E[]) new Object[newCapacity];
         for (int i = 0; i < size; i++) {
             newData[i] = data[(i + front) % data.length];
         }
@@ -148,14 +147,28 @@ public class LoopQueue<E> implements Queue<E> {
         StringBuilder res = new StringBuilder();
         res.append(String.format("Queue:size = %d, capacity = %d \n", size, getCapacity()));
         res.append("front [");
-        for (int i = front; i != tail; i = (i + 1) % data.length) {
-            res.append(data[i]);
+        for (int i = 0; i < size; i++) {
+            res.append(data[(front + 1) % data.length]);
             // 指向不是最后一个元素
-            if ((i + 1) % data.length != tail) {
+            if ((i + front + 1) % data.length != tail) {
                 res.append(",");
             }
         }
         res.append("] tail");
         return res.toString();
+    }
+
+    public static void main(String[] args) {
+        LoopQueueSize<Integer> queue = new LoopQueueSize<>();
+        for (int i = 0; i < 10; i++) {
+            // 入队
+            queue.enqueue(i);
+            System.out.println(queue);
+            if (i % 3 == 2) {
+                // 出队
+                queue.dequeue();
+                System.out.println(queue);
+            }
+        }
     }
 }
