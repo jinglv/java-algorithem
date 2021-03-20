@@ -30,7 +30,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        int opCount = 1000000;
+        int opCount = 100000;
 
         ArrayStack<Integer> arrayStack = new ArrayStack<>();
         double time1 = testStack(arrayStack, opCount);
