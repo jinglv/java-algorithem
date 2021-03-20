@@ -1,6 +1,8 @@
 package demo.structure.queue;
 
 /**
+ * 链表队列测试类
+ *
  * @author jingLv
  * @date 2020/12/10
  */
