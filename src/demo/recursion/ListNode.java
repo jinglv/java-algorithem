@@ -1,11 +1,19 @@
 package demo.recursion;
 
 /**
+ * 定义ListNode，在leetcode203题中使用
+ *
  * @author jingLv
  * @date 2020/12/14
  */
 public class ListNode {
+    /**
+     * 值
+     */
     int val;
+    /**
+     * 节点
+     */
     ListNode next;
 
     ListNode(int x) {
@@ -16,7 +24,7 @@ public class ListNode {
      * 链表节点的构造函数
      * 使用arr为参数，创建一个链表，当前的ListNode为链表头节点
      *
-     * @param arr
+     * @param arr 数组
      */
     public ListNode(int[] arr) {
         if (arr == null || arr.length == 0) {
@@ -34,7 +42,7 @@ public class ListNode {
     /**
      * 以当前节点为头节点的链表信息字符串
      *
-     * @return
+     * @return string
      */
     @Override
     public String toString() {

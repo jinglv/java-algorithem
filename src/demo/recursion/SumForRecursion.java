@@ -6,13 +6,13 @@ package demo.recursion;
  * @author jingLv
  * @date 2020/12/14
  */
-public class Sum {
+public class SumForRecursion {
 
     /**
      * 递归求arr中所有元素的和
      *
-     * @param arr
-     * @return
+     * @param arr 数组
+     * @return 求和的值
      */
     public static int sum(int[] arr) {
         return sum(arr, 0);
@@ -21,9 +21,9 @@ public class Sum {
     /**
      * 计算arr[l...n)这个区间内所有数字的和
      *
-     * @param arr
-     * @param l
-     * @return
+     * @param arr 数组
+     * @param l   数组的起始值（左边界的索引值）
+     * @return 求和的值
      */
     private static int sum(int[] arr, int l) {
         if (l == arr.length) {

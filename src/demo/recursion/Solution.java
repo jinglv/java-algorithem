@@ -1,107 +1,59 @@
 package demo.recursion;
 
 /**
- * leetcode203题
+ * 打印输出方式 -- 递归算法的调试
  *
- * @author jingLv
- * @date 2020/12/14
+ * @author jinglv
+ * @date 2021/03/22
  */
 public class Solution {
 
-    public ListNode removeElements(ListNode head, int val) {
-        // 头节点不为空，且头节点的值等于给定的值
-        while (head != null && head.val == val) {
-            // 删除节点的过程
-            ListNode delNode = head;
-            head = head.next;
-            delNode.next = null;
-        }
-        // 如果头节点为空，则链表为空，直接返回null
-        if (head == null) {
-            return null;
-        }
-
-        ListNode prev = head;
-        while (prev.next != null) {
-            if (prev.next.val == val) {
-                ListNode delNode = prev.next;
-                prev.next = delNode.next;
-                delNode.next = null;
-            } else {
-                prev = prev.next;
-            }
-        }
-        return head;
-    }
-
-    public ListNode removeE(ListNode head, int val) {
-        while (head != null && head.val == val) {
-            head = head.next;
-        }
-        if (head == null) {
-            return null;
-        }
-
-        ListNode prev = head;
-        while (prev.next != null) {
-            if (prev.next.val == val) {
-                prev.next = prev.next.next;
-            } else {
-                prev = prev.next;
-            }
-        }
-        return head;
-    }
-
     /**
-     * 使虚拟节点解决问题
+     * 递归删除链表节点
      *
-     * @param head
-     * @param val
-     * @return
+     * @param head  头节点
+     * @param val   删除的节点
+     * @param depth 递归调用深度
+     * @return 已删除节点的链表
      */
-    public ListNode removeElementsDummy(ListNode head, int val) {
-        ListNode dummyHead = new ListNode(-1);
-        dummyHead.next = head;
-
-        ListNode prev = dummyHead;
-        while (prev.next != null) {
-            if (prev.next.val == val) {
-                prev.next = prev.next.next;
-            } else {
-                prev = prev.next;
-            }
-        }
-        return dummyHead.next;
-    }
-
-    /**
-     * 使用递归解决问题
-     *
-     * @param head
-     * @param val
-     * @return
-     */
-    public ListNode removeElementsRecursion(ListNode head, int val) {
+    public ListNode removeElements(ListNode head, int val, int depth) {
+        String depthString = generateDepthString(depth);
+        System.out.print(depthString);
+        System.out.println("Call: remove " + val + " in " + head);
         if (head == null) {
+            System.out.print(depthString);
+            System.out.println("Return:" + head);
             return null;
         }
-        ListNode result = removeElementsRecursion(head.next, val);
-//        if (head.val == val) {
-//            return result;
-//        } else {
-//            head.next = result;
-//        }
-//        return head;
-        return head.val == val ? head.next : head;
+        ListNode res = removeElements(head.next, val, depth + 1);
+        System.out.print(depthString);
+        System.out.println("After remove:" + val + ":" + res);
+        ListNode ret;
+        if (head.val == val) {
+            ret = res;
+        } else {
+            head.next = res;
+            ret = head;
+        }
+        System.out.print(depthString);
+        System.out.println("Return:" + ret);
+        return ret;
+    }
+
+    private String generateDepthString(int depth) {
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < depth; i++) {
+            // 每深度调用一次，添加"--"，掉用的越深，则得到的字符串越长
+            result.append("--");
+        }
+        return result.toString();
     }
 
     public static void main(String[] args) {
         int[] nums = {1, 2, 6, 3, 4, 5, 6};
         ListNode head = new ListNode(nums);
         System.out.println(head);
-
-        ListNode result = (new Solution()).removeElementsRecursion(head, 6);
-        System.out.println(result);
+        ListNode res = (new Solution()).removeElements(head, 6, 0);
+        System.out.println(res);
     }
 }
